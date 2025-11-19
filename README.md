@@ -25,7 +25,7 @@ Chatbot berbasis Google AI yang bisa diajak ngobrol santai, curhat, tanya-tanya,
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/username/aang-ai.git
+git clone https://github.com/aangbaejuri/aang-ai.git
 cd aang-ai
 ```
 
