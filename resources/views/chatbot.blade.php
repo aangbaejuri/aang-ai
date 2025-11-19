@@ -75,21 +75,7 @@
             </div>
         </div>
         
-        <div class="flex items-center">
-            <div class="relative">
-                <select id="model-selector" name="model" class="appearance-none bg-[#28292C] border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 pr-8 py-2.5">
-                    @foreach($models as $modelKey => $modelName)
-                        <option value="{{ $modelKey }}" {{ $currentModel == $modelKey ? 'selected' : '' }}>
-                            {{ $modelName }}
-                        </option>
-                    @endforeach
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
-                </div>
-            </div>
-        </div>
-    </header>
+        </header>
 
     <div id="chat-window" class="flex-1 p-4 sm:p-8 overflow-y-auto space-y-8 scroll-smooth">
         
@@ -120,8 +106,7 @@
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-bold text-gray-300 mb-1">
                                 Aang AI 
-                                <span class="text-xs font-medium text-gray-400">({{ $models[$currentModel] ?? 'Default' }})</span>
-                            </p>
+                                </p>
                             <div class="ai-content-raw hidden">{{ $message['parts'][0]['text'] }}</div>
                             <div class="markdown-body"></div> 
                         </div>
@@ -179,7 +164,6 @@
         const messageInput = document.getElementById('message-input');
         const sendButton = document.getElementById('send-button');
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const modelSelector = document.getElementById('model-selector');
         
         let loadingIndicator = null;
 
@@ -338,9 +322,7 @@
 
                 const name = document.createElement('p');
                 name.classList.add('text-sm', 'font-bold', 'text-gray-300', 'mb-1');
-                
-                const selectedModelText = modelSelector.options[modelSelector.selectedIndex].text;
-                name.innerHTML = `Aang AI <span class="text-xs font-medium text-gray-400">(${selectedModelText.trim()})</span>`;
+                name.innerHTML = `Aang AI`;
 
                 const messageDiv = document.createElement('div');
                 
@@ -387,29 +369,6 @@
                 });
             }
         });
-        
-        modelSelector.addEventListener('change', function() {
-            const newModel = this.value;
-            fetch("{{ route('chat.model.switch') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken,
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({ model: newModel })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log('Model switched to ' + newModel);
-                } else {
-                    console.error('Gagal ganti model.');
-                }
-            })
-            .catch(err => console.error('Error ganti model:', err));
-        });
-        
     });
 </script>
 @endpush
