@@ -2,7 +2,7 @@
 
 Chatbot berbasis Google AI yang bisa diajak ngobrol santai, curhat, tanya-tanya, atau minta bantuan coding. Dibuat dengan bahasa Indonesia casual ala anak Jaksel.
 
-![Aang AI Preview](public/capture.png)
+![Aang AI Preview](public/capture_aang_ai.png)
 
 ## Fitur
 
