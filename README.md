@@ -78,10 +78,9 @@ Aplikasi akan berjalan di `http://localhost:8000`
 ## Penggunaan
 
 1. Buka aplikasi di browser
-2. Pilih model AI yang ingin digunakan (Flash 2.0, Flash 2.5, atau Pro 2.5)
-3. Ketik pesan di input box
-4. Tekan enter atau klik tombol kirim
-5. Chat history akan tersimpan selama sesi aktif
+2. Ketik pesan di input box
+3. Tekan enter atau klik tombol kirim
+4. Chat history akan tersimpan selama sesi aktif
 
 ## License
 
