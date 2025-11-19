@@ -35,7 +35,14 @@ composer install
 npm install
 ```
 
-### 3. Integrasi Google AI
+### 3. Konfigurasi Environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Integrasi Google AI
 
 1. Buka [Google AI Studio](https://aistudio.google.com)
 2. Login dengan akun Google
@@ -48,7 +55,7 @@ npm install
 GOOGLE_API_KEY=isi_dengan_api_key_anda
 ```
 
-### 4. Build Assets
+### 5. Build Assets
 
 ```bash
 npm run build
@@ -60,7 +67,7 @@ Untuk development dengan hot reload:
 npm run dev
 ```
 
-### 5. Jalankan Server
+### 6. Jalankan Server
 
 ```bash
 php artisan serve
