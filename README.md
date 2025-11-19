@@ -6,7 +6,6 @@ Chatbot berbasis Google AI yang bisa diajak ngobrol santai, curhat, tanya-tanya,
 
 ## Fitur
 
-- **3 Versi Model AI**: Flash 2.0, Flash 2.5, dan Pro 2.5
 - **Bahasa Indonesia Gaul**: Cocok untuk eksperimen chatbot yang lebih natural dan santai
 - **Multi-fungsi**: Chat bot curhat, tanya jawab, generator kode, dan brainstorming ide kreatif
 - **Riwayat Chat**: Menyimpan percakapan dalam sesi
