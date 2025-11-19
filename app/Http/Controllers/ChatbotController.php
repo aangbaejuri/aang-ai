@@ -9,14 +9,6 @@ use Illuminate\Support\Str;
 
 class ChatbotController extends Controller
 {
-    private $models = [
-        'models/gemini-2.0-flash' => 'Flash 2.0',
-        'models/gemini-2.5-flash' => 'Flash 2.5',
-        'models/gemini-2.5-pro' => 'Pro 2.5',
-    ];
-    
-    private $defaultModel = 'models/gemini-2.0-flash';
-
     public function show()
     {
         $currentChatId = session('current_chat_id');
@@ -26,17 +18,8 @@ class ChatbotController extends Controller
             $history = session('chat_history_' . $currentChatId, []);
         }
         
-        $currentModel = session('current_model', $this->defaultModel);
-        
-        if (!array_key_exists($currentModel, $this->models)) {
-            $currentModel = $this->defaultModel;
-            session(['current_model' => $currentModel]);
-        }
-        
         return view('chatbot', [
-            'history' => $history,
-            'models' => $this->models,
-            'currentModel' => $currentModel
+            'history' => $history
         ]);
     }
 
@@ -97,22 +80,6 @@ class ChatbotController extends Controller
         return redirect()->route('chat.show');
     }
 
-    public function switchModel(Request $request)
-    {
-        $request->validate([
-            'model' => 'required|string'
-        ]);
-
-        $model = $request->input('model');
-
-        if (!array_key_exists($model, $this->models)) {
-            return response()->json(['success' => false, 'error' => 'Model tidak valid.'], 422);
-        }
-
-        session(['current_model' => $model]);
-        return response()->json(['success' => true, 'model' => $model]);
-    }
-
     public function sendMessage(Request $request)
     {
         $request->validate([
@@ -126,12 +93,7 @@ class ChatbotController extends Controller
             return response()->json(['error' => 'Server AI tidak ditemukan.'], 500);
         }
         
-        $modelName = session('current_model', $this->defaultModel);
-        if (!array_key_exists($modelName, $this->models)) {
-            $modelName = $this->defaultModel;
-        }
-        
-        $apiUrl = "https://generativelanguage.googleapis.com/v1beta/{$modelName}:generateContent?key={$apiKey}";
+        $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={$apiKey}";
 
         $currentChatId = session('current_chat_id');
         $isNewChat = false;
